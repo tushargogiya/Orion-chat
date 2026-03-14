@@ -8,6 +8,6 @@ langchain-openai
 langchain-mcp-adapters
 python-dotenv
 aiosqlite
-duckduckgo-search
+duckduckgo-search==6.3.7
 requests
 pydantic
