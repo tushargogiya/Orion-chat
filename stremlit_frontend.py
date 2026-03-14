@@ -1,7 +1,15 @@
+import os
 import queue
 import uuid
 
 import streamlit as st
+
+# Inject Streamlit Cloud secrets into os.environ BEFORE importing backend
+# (backend reads keys via os.getenv() at import time)
+for _k, _v in st.secrets.items():
+    if _k not in os.environ:
+        os.environ[_k] = str(_v)
+
 from langgraph_backend import chatbot, retrieve_all_threads, submit_async_task
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
