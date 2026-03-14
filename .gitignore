@@ -1,0 +1,23 @@
+# Secrets - NEVER commit these
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Database files (ephemeral on cloud)
+*.db
+*.db-shm
+*.db-wal
+*.db-x-checkpoints*
+
+# Streamlit secrets (local only)
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
