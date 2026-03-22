@@ -68,7 +68,7 @@ client = MultiServerMCPClient(
     {
         "expense": {
             "transport": "streamable_http",
-            "url": os.getenv("MCP_URL", "https://splendid-gold-dingo.fastmcp.app/mcp"),
+            "url": os.getenv("MCP_URL"),
         }
     }
 )

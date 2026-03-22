@@ -199,9 +199,9 @@ if not st.session_state["message_history"]:
 
 | Feature | Description |
 |---|---|
-| 🔍 **Web Search** | Real-time web search via DuckDuckGo |
+| 🔍 **Web Search** | Real-time web search for up-to-date information |
 | 📈 **Stock Prices** | Live stock data (e.g. *"What's AAPL price?"*) |
-| 🧾 **Expense Tracking** | Connected to an MCP expense server |
+| 🧾 **Expense Tracking** | Add, view, and manage your expenses |
 | 💾 **Persistent Memory** | Conversations saved & resumable across sessions |
 | 🔄 **Streaming** | Token-by-token response streaming |
 | 👤 **Human-in-the-Loop** | Approval flow for sensitive actions |
@@ -258,14 +258,13 @@ if user_input:
                     raise metadata
 
                 if isinstance(message_chunk, ToolMessage):
-                    tool_name = getattr(message_chunk, "name", "tool")
                     if status_holder["box"] is None:
                         status_holder["box"] = st.status(
-                            f"🔧 Running `{tool_name}`…", expanded=True
+                            "🔧 Working on it…", expanded=True
                         )
                     else:
                         status_holder["box"].update(
-                            label=f"🔧 Running `{tool_name}`…",
+                            label="🔧 Working on it…",
                             state="running",
                             expanded=True,
                         )
