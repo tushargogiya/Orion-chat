@@ -74,14 +74,21 @@ client = MultiServerMCPClient(
 )
 
 
-def load_mcp_tools() -> list[BaseTool]:
+async def _load_mcp_tools_async() -> list[BaseTool]:
     try:
-        tools = run_async(client.get_tools())
+        # __aenter__ establishes the HTTP connection; never call __aexit__ so
+        # sessions stay alive for the lifetime of the process.
+        initialized = await client.__aenter__()
+        tools = initialized.get_tools()
         print(f"[MCP] Loaded {len(tools)} tools: {[t.name for t in tools]}")
         return tools
     except Exception as e:
         print(f"[MCP] Failed to load tools: {e}")
         return []
+
+
+def load_mcp_tools() -> list[BaseTool]:
+    return run_async(_load_mcp_tools_async())
 
 
 mcp_tools = load_mcp_tools()
